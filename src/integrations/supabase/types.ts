@@ -14,7 +14,250 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          email: string | null
+          full_name: string | null
+          id: string
+          updated_at: string
+          user_id: string
+          youtube_access_token: string | null
+          youtube_channel_id: string | null
+          youtube_channel_name: string | null
+          youtube_refresh_token: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          updated_at?: string
+          user_id: string
+          youtube_access_token?: string | null
+          youtube_channel_id?: string | null
+          youtube_channel_name?: string | null
+          youtube_refresh_token?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          updated_at?: string
+          user_id?: string
+          youtube_access_token?: string | null
+          youtube_channel_id?: string | null
+          youtube_channel_name?: string | null
+          youtube_refresh_token?: string | null
+        }
+        Relationships: []
+      }
+      slices: {
+        Row: {
+          created_at: string
+          description: string | null
+          end_time: number
+          file_url: string | null
+          id: string
+          keywords: string[] | null
+          start_time: number
+          title: string | null
+          updated_at: string
+          upload_status: string | null
+          uploaded_at: string | null
+          user_id: string
+          video_id: string
+          youtube_video_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          end_time: number
+          file_url?: string | null
+          id?: string
+          keywords?: string[] | null
+          start_time: number
+          title?: string | null
+          updated_at?: string
+          upload_status?: string | null
+          uploaded_at?: string | null
+          user_id: string
+          video_id: string
+          youtube_video_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          end_time?: number
+          file_url?: string | null
+          id?: string
+          keywords?: string[] | null
+          start_time?: number
+          title?: string | null
+          updated_at?: string
+          upload_status?: string | null
+          uploaded_at?: string | null
+          user_id?: string
+          video_id?: string
+          youtube_video_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "slices_video_id_fkey"
+            columns: ["video_id"]
+            isOneToOne: false
+            referencedRelation: "videos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      "Tube Slize database": {
+        Row: {
+          created_at: string
+          id: number
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+        }
+        Update: {
+          created_at?: string
+          id?: number
+        }
+        Relationships: []
+      }
+      upload_jobs: {
+        Row: {
+          created_at: string
+          error_message: string | null
+          id: string
+          status: string | null
+          total_slices: number
+          updated_at: string
+          uploaded_slices: number | null
+          user_id: string
+          video_id: string
+        }
+        Insert: {
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          status?: string | null
+          total_slices: number
+          updated_at?: string
+          uploaded_slices?: number | null
+          user_id: string
+          video_id: string
+        }
+        Update: {
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          status?: string | null
+          total_slices?: number
+          updated_at?: string
+          uploaded_slices?: number | null
+          user_id?: string
+          video_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "upload_jobs_video_id_fkey"
+            columns: ["video_id"]
+            isOneToOne: false
+            referencedRelation: "videos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_preferences: {
+        Row: {
+          auto_slice_channel: boolean | null
+          auto_upload: boolean | null
+          created_at: string
+          default_slice_count: number | null
+          default_slice_length: number | null
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          auto_slice_channel?: boolean | null
+          auto_upload?: boolean | null
+          created_at?: string
+          default_slice_count?: number | null
+          default_slice_length?: number | null
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          auto_slice_channel?: boolean | null
+          auto_upload?: boolean | null
+          created_at?: string
+          default_slice_count?: number | null
+          default_slice_length?: number | null
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      videos: {
+        Row: {
+          channel_id: string | null
+          channel_name: string | null
+          created_at: string
+          description: string | null
+          duration: number | null
+          id: string
+          slice_count: number | null
+          slice_length: number | null
+          status: string | null
+          thumbnail_url: string | null
+          title: string | null
+          updated_at: string
+          user_id: string
+          youtube_url: string
+        }
+        Insert: {
+          channel_id?: string | null
+          channel_name?: string | null
+          created_at?: string
+          description?: string | null
+          duration?: number | null
+          id?: string
+          slice_count?: number | null
+          slice_length?: number | null
+          status?: string | null
+          thumbnail_url?: string | null
+          title?: string | null
+          updated_at?: string
+          user_id: string
+          youtube_url: string
+        }
+        Update: {
+          channel_id?: string | null
+          channel_name?: string | null
+          created_at?: string
+          description?: string | null
+          duration?: number | null
+          id?: string
+          slice_count?: number | null
+          slice_length?: number | null
+          status?: string | null
+          thumbnail_url?: string | null
+          title?: string | null
+          updated_at?: string
+          user_id?: string
+          youtube_url?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
