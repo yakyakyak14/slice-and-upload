@@ -1,15 +1,18 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
-import { AuthForm } from "@/components/auth/AuthForm";
 
-const Index = () => {
+interface ProtectedRouteProps {
+  children: React.ReactNode;
+}
+
+export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user && !loading) {
-      navigate("/dashboard");
+    if (!loading && !user) {
+      navigate("/");
     }
   }, [user, loading, navigate]);
 
@@ -24,11 +27,9 @@ const Index = () => {
     );
   }
 
-  if (user) {
-    return null; // Will redirect to dashboard
+  if (!user) {
+    return null; // Will redirect to home
   }
 
-  return <AuthForm />;
+  return <>{children}</>;
 };
-
-export default Index;
